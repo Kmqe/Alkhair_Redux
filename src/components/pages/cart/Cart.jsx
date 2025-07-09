@@ -1,0 +1,139 @@
+import "./cart.css";
+import { useContext, useState } from "react";
+import { CartContext } from "../../context/ProductsContext";
+
+import cartIsEmpty2 from "../../images/cart_is_empty2.png";
+
+// ICONS
+import { MdDeleteOutline } from "react-icons/md";
+import { LuPlus } from "react-icons/lu";
+import { LuMinus } from "react-icons/lu";
+
+const Cart = () => {
+  const { cart, setAddToCart } = useContext(CartContext);
+  const [subTotal, setSubTotal] = useState(() => {
+    const total = cart.reduce((total, product) => {
+      return total + product.price * product.quantity;
+    }, 0);
+    return total ? total : 0;
+  });
+
+  function handleClickDelete(product) {
+    const updateCart = cart.filter((item) => {
+      return item.id !== product.id;
+    });
+    setAddToCart(updateCart);
+  }
+
+  function handleClickPlus(product) {
+    const updateCart = cart.map((item) => {
+      if (item.id !== product.id) {
+        return item;
+      }
+      if (product.quantity >= product.stock) return product;
+      setSubTotal((value) => value + product.price);
+      return { ...product, quantity: product.quantity + 1 };
+    });
+    setAddToCart(updateCart);
+  }
+
+  function handleClickMinus(product) {
+    const updateCart = cart.map((item) => {
+      if (item.id !== product.id) {
+        return item;
+      }
+      if (product.quantity == 1) return product;
+      setSubTotal((value) => value - product.price);
+      return { ...product, quantity: product.quantity - 1 };
+    });
+    setAddToCart(updateCart);
+  }
+
+  {
+    return cart.length ? (
+      <section className="section">
+        <div className="container">
+          <div className="cart_products">
+            <div className="cart-row">
+              <h3 className="text-center">DELETE</h3>
+              <h3>PRODUCT</h3>
+              <h3 className="text-center">PRICE</h3>
+              <h3 className="text-center">QUANTITY</h3>
+              <h3 className="text-center">TOTAL</h3>
+            </div>
+            {cart.map((product) => (
+              <div className="cart-row" key={product.id}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <span
+                    className="delete_icon"
+                    onClick={() => handleClickDelete(product)}
+                  >
+                    <MdDeleteOutline />
+                  </span>
+                </div>
+                <div className="product-info">
+                  <img src={product.thumbnail} alt={product.title} />
+                  <div>
+                    <div className="title">
+                      <h3 title={product.title}>{product.title}</h3>
+                    </div>
+                    <div className="tags">
+                      {product.tags.map((tag) => (
+                        <button className="btn" key={tag}>
+                          {tag}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="price center">
+                  <h3>${product.price}</h3>
+                </div>
+                <div className="quantity center">
+                  <button
+                    className="plus"
+                    onClick={() => handleClickPlus(product)}
+                  >
+                    <LuPlus />
+                  </button>
+                  <button className="count">{product.quantity}</button>
+                  <button
+                    className="minus"
+                    onClick={() => handleClickMinus(product)}
+                  >
+                    <LuMinus />
+                  </button>
+                </div>
+                <div className="total center">
+                  <h3>${(product.price * product.quantity).toFixed(2)}</h3>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="cart_totals">
+            <div className="box_subtotal">
+              <h3>Subtotal:</h3>
+              <h3> ${subTotal.toFixed(2)}</h3>
+            </div>
+            <button className="btn check-out">Check out</button>
+          </div>
+        </div>
+      </section>
+    ) : (
+      <section>
+        <div className="container cart_empty">
+          <img src={cartIsEmpty2} alt={"Cart Is Empty"} />
+          <h1>Empty Shopping Cart</h1>
+        </div>
+      </section>
+    );
+  }
+};
+
+export default Cart;

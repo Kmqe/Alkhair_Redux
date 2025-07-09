@@ -1,0 +1,113 @@
+/* Roboto */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+/* Quicksand  */
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+
+:root {
+  --primary_color: #329b6b;
+  --secondary_color: #3bb77e;
+}
+
+/*============ Global Rules ============*/
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  position: relative;
+}
+
+.container {
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* section {
+  padding-top: 100px;
+  padding-bottom: 100px;
+} */
+ul {
+  list-style: none;
+}
+
+a,
+img,
+span,
+input,
+button {
+  display: block;
+}
+
+input,
+button {
+  outline: none;
+  border: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.border {
+  border: 3px solid red;
+}
+
+.btn {
+  outline: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.center-v {
+  display: flex;
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Small screens (tablets, ≥768px) */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+/* Medium screens (small laptops, ≥992px) */
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+/* Large screens (desktops, ≥1200px) */
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+/* Extra large screens (large desktops, ≥1400px) */
+@media (min-width: 1400px) {
+  .container {
+    width: 1370px;
+  }
+}
