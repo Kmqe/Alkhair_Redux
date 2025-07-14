@@ -1,4 +1,9 @@
-:root {
-  --primary_color: #329b6b;
-  --secondary_color: #3bb77e;
+.product h1 {
+  font-size: 30px;
+  margin: 35px 10px;
+  text-transform: capitalize;
+}
+
+.product .mySwiper {
+  padding: 10px;
 }

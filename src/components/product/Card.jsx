@@ -1,6 +1,9 @@
 import "./card.css";
 import { Link } from "react-router-dom";
 
+import { useContext } from "react";
+import { CartContext, WishListContext } from "../context/ProductsContext";
+
 // ICONS
 import { FaStar } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
@@ -13,9 +16,28 @@ const Card = ({
   product,
   inCart,
   inWishList,
-  handleClickBtnAddToCart,
-  handleCLickBtnAddToWishList,
+  // handleClickBtnAddToCart,
+  // handleCLickBtnAddToWishList,
 }) => {
+  const { cart, setAddToCart } = useContext(CartContext);
+  const { wishList, setWishList } = useContext(WishListContext);
+
+  function handleClickBtnAddToCart(product) {
+    setAddToCart([...cart, { ...product, quantity: 1 }]);
+  }
+
+  function handleCLickBtnAddToWishList(product) {
+    const find = wishList.some((item) => item.id === product.id);
+    if (find) {
+      const newListOfWish = wishList.filter((item) =>
+        item.id !== product.id ? item : null
+      );
+      setWishList(newListOfWish);
+    } else {
+      setWishList([...wishList, product]);
+    }
+  }
+
   return (
     <div className="card_product">
       <div className="img_content">
