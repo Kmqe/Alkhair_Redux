@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Products from "../product/Products";
 import { CartContext } from "../context/ProductsContext";
+import ProductSkeleton from "../product/productSkeleton/ProductSkeleton";
 
 const categories = [
   "beauty",
@@ -58,16 +59,20 @@ const Home = () => {
 
   return (
     <div className="container">
-      {allProducts.map((item, index) => {
-        return (
-          <Products
-            key={index}
-            productsOfArray={item.products}
-            category={item.category}
-            loading={loading}
-          />
-        );
-      })}
+      {loading ? (
+        <ProductSkeleton />
+      ) : (
+        allProducts.map((item, index) => {
+          return (
+            <Products
+              key={index}
+              productsOfArray={item.products}
+              category={item.category}
+              loading={loading}
+            />
+          );
+        })
+      )}
     </div>
   );
 };

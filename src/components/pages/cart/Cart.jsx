@@ -4,13 +4,17 @@ import { CartContext } from "../../context/ProductsContext";
 
 import cartIsEmpty2 from "../../images/cart_is_empty2.png";
 
+import { Link } from "react-router-dom";
+
 // ICONS
 import { MdDeleteOutline } from "react-icons/md";
 import { LuPlus } from "react-icons/lu";
 import { LuMinus } from "react-icons/lu";
 
 const Cart = () => {
+  // const [loading, setLoading]
   const { cart, setAddToCart } = useContext(CartContext);
+
   const [subTotal, setSubTotal] = useState(() => {
     const total = cart.reduce((total, product) => {
       return total + product.price * product.quantity;
@@ -51,7 +55,7 @@ const Cart = () => {
 
   {
     return cart.length ? (
-      <section className="section">
+      <section className="section cart-page">
         <div className="container">
           <div className="cart_products">
             <div className="cart-row">
@@ -78,11 +82,13 @@ const Cart = () => {
                   </span>
                 </div>
                 <div className="product-info">
-                  <img src={product.thumbnail} alt={product.title} />
+                  <Link to={`/products/${product.id}`}>
+                    <img src={product.thumbnail} alt={product.title} />
+                  </Link>
                   <div>
-                    <div className="title">
+                    <Link className="title" to={`/products/${product.id}`}>
                       <h3 title={product.title}>{product.title}</h3>
-                    </div>
+                    </Link>
                     <div className="tags">
                       {product.tags.map((tag) => (
                         <button className="btn" key={tag}>

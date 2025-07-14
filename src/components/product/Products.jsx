@@ -11,24 +11,38 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 // import required modules
 import { Navigation } from "swiper/modules";
-// ICONS
+// // ICONS
 import { FaStar } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
 import { FaRegHeart } from "react-icons/fa";
 import { FaShare } from "react-icons/fa";
 import { BsCartCheck } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import Card from "./Card";
 
-const Products = ({ category, productsOfArray, loading }) => {
+import { WishListContext } from "../context/ProductsContext";
+
+const Products = ({ category, productsOfArray }) => {
   const { cart, setAddToCart } = useContext(CartContext);
+  const { wishList, setWishList } = useContext(WishListContext);
 
   function handleClickBtnAddToCart(product) {
     setAddToCart([...cart, { ...product, quantity: 1 }]);
   }
 
-  return loading ? (
-    <p>Loading...</p>
-  ) : (
+  function handleCLickBtnAddToWishList(product) {
+    const find = wishList.some((item) => item.id === product.id);
+    if (find) {
+      const newListOfWish = wishList.filter((item) =>
+        item.id !== product.id ? item : null
+      );
+      setWishList(newListOfWish);
+    } else {
+      setWishList([...wishList, product]);
+    }
+  }
+
+  return (
     <section className="product">
       <h1>{category.replaceAll("-", " ")}</h1>
       <>
@@ -55,10 +69,18 @@ const Products = ({ category, productsOfArray, loading }) => {
         >
           {productsOfArray.map((product) => {
             const inCart = cart.some((item) => item.id === product.id);
+            const inWishList = wishList.some((item) => item.id === product.id);
 
             return (
               <SwiperSlide key={product.id}>
-                <div className="card_product">
+                <Card
+                  product={product}
+                  inCart={inCart}
+                  inWishList={inWishList}
+                  handleClickBtnAddToCart={handleClickBtnAddToCart}
+                  handleCLickBtnAddToWishList={handleCLickBtnAddToWishList}
+                />
+                {/* <div className="card_product">
                   <div className="img_content">
                     <Link to={`/products/${product.id}`}>
                       <img
@@ -128,7 +150,7 @@ const Products = ({ category, productsOfArray, loading }) => {
                       </button>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </SwiperSlide>
             );
           })}

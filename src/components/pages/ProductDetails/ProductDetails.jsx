@@ -8,8 +8,8 @@ import { CartContext } from "../../context/ProductsContext";
 // ICONS
 import { FaStar } from "react-icons/fa6";
 import { TiShoppingCart } from "react-icons/ti";
-import { TbShoppingCartCheck } from "react-icons/tb";
 import { BsCartCheck } from "react-icons/bs";
+import ProductDetailsSkeleton from "./productDetailsSkeleton/ProductDetailsSkeleton";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState({});
@@ -52,7 +52,7 @@ const ProductDetails = () => {
 
   {
     return loading ? (
-      <p>Loading...</p>
+      <ProductDetailsSkeleton />
     ) : (
       <section className="product_details">
         <div className="container">

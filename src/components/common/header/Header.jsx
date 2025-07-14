@@ -3,6 +3,7 @@ import logo from "/images/logo.png";
 
 import { useContext } from "react";
 import { CartContext } from "../../context/ProductsContext";
+import { WishListContext } from "../../context/ProductsContext";
 
 import { Link } from "react-router-dom";
 
@@ -14,6 +15,8 @@ import { IoPerson } from "react-icons/io5";
 
 const Header = () => {
   const { cart } = useContext(CartContext);
+  const { wishList } = useContext(WishListContext);
+
   return (
     <header>
       <div className="container">
@@ -38,10 +41,10 @@ const Header = () => {
         </div>
 
         <div className="box-icon">
-          <div className="icon">
+          <Link to={"/wishlist"} className="icon">
             <FaRegHeart />
-            <span className="count">1</span>
-          </div>
+            <span className="count">{wishList.length}</span>
+          </Link>
           <Link to={"/cart"} className="icon">
             <TiShoppingCart />
             <span className="count">{cart.length}</span>

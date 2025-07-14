@@ -1,8 +1,5 @@
 import "./productsSkeleton.css";
 
-import { useContext } from "react";
-import { CartContext } from "../../context/ProductsContext";
-
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
@@ -11,27 +8,37 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 // import required modules
 import { Navigation } from "swiper/modules";
-// ICONS
-import { FaStar } from "react-icons/fa";
-import { TiShoppingCart } from "react-icons/ti";
-import { FaRegHeart } from "react-icons/fa";
-import { FaShare } from "react-icons/fa";
-import { BsCartCheck } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-const Products = ({ category, productsOfArray, loading }) => {
-  const { cart, setAddToCart } = useContext(CartContext);
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
-  function handleClickBtnAddToCart(product) {
-    setAddToCart([...cart, { ...product, quantity: 1 }]);
-  }
+const ProductSkeleton = () => {
+  const [products, setProducts] = useState([]);
 
-  return loading ? (
-    <p>Loading...</p>
-  ) : (
-    <section className="product">
-      <h1>{category.replaceAll("-", " ")}</h1>
-      <>
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch(
+          "https://dummyjson.com/products/category/smartphones"
+        );
+        const data = await res.json();
+        setProducts(data.products);
+      } catch (error) {
+        console.error("حدث خطأ أثناء جلب البيانات:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  return (
+    <section className="product-skeleton">
+      <div className="container">
+        {/* <h1>Hello</h1> */}
+        <h1>
+          <Skeleton width={200} />
+        </h1>
         <Swiper
           slidesPerView={4}
           breakpoints={{
@@ -53,79 +60,41 @@ const Products = ({ category, productsOfArray, loading }) => {
           modules={[Navigation]}
           className="mySwiper"
         >
-          {productsOfArray.map((product) => {
-            const inCart = cart.some((item) => item.id === product.id);
-
+          {products.map((product) => {
             return (
               <SwiperSlide key={product.id}>
                 <div className="card_product">
                   <div className="img_content">
-                    <Link to={`/products/${product.id}`}>
-                      <img
-                        src={product.thumbnail}
-                        alt={product.title}
-                        className="card_img"
-                        loading="lazy"
-                      />
-                    </Link>
-                    <div className="action_product">
-                      <span>
-                        <FaRegHeart />
-                      </span>
-                      <span>
-                        <FaShare />
-                      </span>
-                    </div>
+                    <Skeleton width={"100%"} height={207} />
                   </div>
                   <div className="card_info">
-                    <p>{product.category}</p>
-                    <Link to={`/products/${product.id}`}>
-                      <h3 title={product.title}>{product.title}</h3>
-                    </Link>
-                    <div className="rating">
-                      <FaStar />
-                      <FaStar />
-                      <FaStar />
-                      <FaStar />
-                      <FaStar />
+                    <p>
+                      <Skeleton width={100} />
+                    </p>
+                    <div>
+                      <h3>
+                        <Skeleton width={"100%"} />
+                      </h3>
                     </div>
-                    {product.brand ? (
-                      <p className="brand">
-                        by
-                        <span>{`${product.brand}`}</span>
-                      </p>
-                    ) : (
-                      ""
-                    )}
+                    <p className="brand">
+                      <span>
+                        <Skeleton width={100} />
+                      </span>
+                    </p>
                   </div>
                   <div className="price_and_cart">
                     <div className="price">
-                      <span>{`$${product.price.toFixed(2)}`}</span>
                       <span>
-                        {"$" +
-                          (
-                            product.price /
-                            (1 - product.discountPercentage / 100)
-                          ).toFixed(2)}
+                        <Skeleton width={70} />
+                      </span>
+                      <span>
+                        <Skeleton width={40} />
                       </span>
                     </div>
                     <div className="add_to_cart">
-                      <button
-                        className={`btn ${inCart ? "in-cart" : ""}`}
-                        onClick={() => handleClickBtnAddToCart(product)}
-                      >
-                        {inCart ? (
-                          <>
-                            <BsCartCheck />
-                          </>
-                        ) : (
-                          <>
-                            {" "}
-                            <TiShoppingCart />
-                            <span>Add</span>
-                          </>
-                        )}
-                      </button>
+                      <h5>
+                        <Skeleton width={80} height={30} />
+                      </h5>
                     </div>
                   </div>
                 </div>
@@ -133,9 +102,9 @@ const Products = ({ category, productsOfArray, loading }) => {
             );
           })}
         </Swiper>
-      </>
+      </div>
     </section>
   );
 };
 
-export default Products;
+export default ProductSkeleton;

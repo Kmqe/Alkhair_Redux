@@ -1,129 +1,36 @@
-:root {
-  --primary_color: #329b6b;
-  --secondary_color: #3bb77e;
-}
-
-section.product {
-  font-family: "Quicksand";
-}
-
-.product h1 {
+.product-skeleton h1 {
   font-size: 30px;
   margin: 35px 10px;
-  text-transform: capitalize;
 }
 
-.product .mySwiper {
+.product-skeleton .mySwiper {
   padding: 10px;
 }
 
-.product .card_product {
+.product-skeleton .card_product {
   overflow: hidden;
   border: 1px solid #88888842;
   border-radius: 10px;
-  transition: 0.2s;
 }
 
-.product .card_product:hover {
+.product-skeleton .card_product:hover {
   border: 1px solid #3bb77d80;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.product .card_product .img_content {
-  position: relative;
-  overflow: hidden;
-}
-
-.product .card_product .card_img {
-  width: 200px;
-  margin: 0 auto;
-  padding: 30px 0 30px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.product .card_product:hover .cart_img {
-  scale: 1.1;
-}
-
-.product .card_product .action_product {
-  position: absolute;
-  bottom: -100px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  transition: 0.4s;
-}
-
-.product .card_product .action_product span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  background-color: #f6f6f6;
-  color: var(--secondary_color);
-  padding: 10px;
-  font-size: 14px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  transition: 0.3s;
-}
-
-.product .card_product .action_product span:hover {
-  background-color: var(--secondary_color);
-  color: white;
-}
-
-.product .card_product:hover .action_product {
-  bottom: 5px;
-}
-
-.product .card_product .card_info {
+.product-skeleton .card_product .card_info {
   padding: 25px 25px 15px;
 }
 
-.product .card_product .card_info p {
-  color: gray;
-  font-size: 15px;
+.product-skeleton .card_product .card_info p {
   margin-bottom: 10px;
 }
 
-.product .card_product .card_info h3 {
-  margin-bottom: 10px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  transition: 0.2s;
-  cursor: pointer;
-}
-
-.product .card_product .card_info h3:hover {
-  color: var(--primary_color);
-}
-
-.product .card_product .card_info .rating {
-  display: flex;
-  gap: 2px;
-  color: gold;
-  font-size: 13px;
+.product-skeleton .card_product .card_info h3 {
   margin-bottom: 10px;
 }
 
-.product .card_product .card_info .brand {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.product .card_product .card_info .brand span {
-  color: var(--secondary_color);
-}
-
-.product .card_product .price_and_cart {
+.product-skeleton .card_product .price_and_cart {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -131,56 +38,8 @@ section.product {
   margin-bottom: 20px;
 }
 
-.product .card_product .price_and_cart .price {
+.product-skeleton .card_product .price_and_cart .price {
   display: flex;
   flex-direction: column;
   gap: 5px;
-}
-
-.product .card_product .price_and_cart .price span:first-of-type {
-  font-size: 22px;
-  font-weight: bold;
-  color: var(--primary_color);
-}
-
-.product .card_product .price_and_cart .price span:last-of-type {
-  font-size: 16px;
-  font-weight: bold;
-  text-decoration: line-through;
-  color: gray;
-}
-
-.product .card_product .price_and_cart .add_to_cart button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  font-size: 20px;
-  font-weight: 400;
-  background-color: #def9ec;
-  color: #3bb77e;
-  cursor: pointer;
-  transition: 0.4s;
-  width: 100px;
-}
-
-.product .card_product .price_and_cart .add_to_cart button:hover {
-  color: white;
-  background-color: #3bb77e;
-  transform: translateY(-4px);
-}
-
-.product .card_product .price_and_cart .add_to_cart button.active {
-  color: white;
-  background-color: #3bb77e;
-}
-
-.product .card_product .price_and_cart .add_to_cart button span {
-  font-size: 16px;
-}
-
-.product .card_product .price_and_cart .add_to_cart button.in-cart {
-  background-color: #3bb77e;
-  color: white;
-  pointer-events: none;
 }
