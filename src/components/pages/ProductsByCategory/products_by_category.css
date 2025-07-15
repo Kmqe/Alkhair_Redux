@@ -1,9 +1,9 @@
-.wish-list .container h1 {
+.products_by_category h1 {
   margin: 30px 10px;
   font-size: 40px;
 }
 
-.wish-list .container .products_container {
+.products_by_category .container .products_container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
@@ -11,21 +11,21 @@
 }
 
 @media screen and (max-width: 1200px) {
-  .wish-list .container .products_container {
+  .products_by_category .container .products_container {
     grid-template-columns: repeat(3, 1fr);
     gap: 25px;
   }
 }
 
 @media screen and (max-width: 992px) {
-  .wish-list .container .products_container {
+  .products_by_category .container .products_container {
     grid-template-columns: repeat(2, 1fr);
     gap: 25px;
   }
 }
 
 @media screen and (max-width: 450px) {
-  .wish-list .container .products_container {
+  .products_by_category .container .products_container {
     grid-template-columns: 1fr;
     gap: 25px;
   }

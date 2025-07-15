@@ -35,7 +35,6 @@ const ProductSkeleton = () => {
   return (
     <section className="product-skeleton">
       <div className="container">
-        {/* <h1>Hello</h1> */}
         <h1>
           <Skeleton width={200} />
         </h1>

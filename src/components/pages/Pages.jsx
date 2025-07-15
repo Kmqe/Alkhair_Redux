@@ -8,6 +8,7 @@ import ProductDetails from "./ProductDetails/ProductDetails";
 import ProductDetailsSkeleton from "./ProductDetails/productDetailsSkeleton/ProductDetailsSkeleton";
 import WishList from "./wishlist/WishList";
 import { WishListContext } from "../context/ProductsContext";
+import ProductsByCategory from "./ProductsByCategory/ProductsByCategory";
 
 const Pages = () => {
   //
@@ -38,8 +39,11 @@ const Pages = () => {
             <Route path="home" element={<Home />} />
             <Route path="cart" element={<Cart />} />
             <Route path="products/:id" element={<ProductDetails />} />
+            <Route
+              path="products/category/:category"
+              element={<ProductsByCategory />}
+            />
             <Route path="wishlist/" element={<WishList />} />
-            {/* <Route path="/x" element={<ProductDetailsSkeleton />} /> */}
           </Routes>
         </WishListContext.Provider>
       </CartContext.Provider>

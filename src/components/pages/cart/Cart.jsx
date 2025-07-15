@@ -91,9 +91,9 @@ const Cart = () => {
                     </Link>
                     <div className="tags">
                       {product.tags.map((tag) => (
-                        <button className="btn" key={tag}>
-                          {tag}
-                        </button>
+                        <Link to={`/products/category/${tag}`} key={tag}>
+                          <button className="btn">{tag}</button>
+                        </Link>
                       ))}
                     </div>
                   </div>
