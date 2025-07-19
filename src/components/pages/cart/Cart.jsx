@@ -12,9 +12,9 @@ import { LuPlus } from "react-icons/lu";
 import { LuMinus } from "react-icons/lu";
 
 const Cart = () => {
-  // const [loading, setLoading]
   const { cart, setAddToCart } = useContext(CartContext);
 
+  // Calculate subtotal when component loads based on cart items
   const [subTotal, setSubTotal] = useState(() => {
     const total = cart.reduce((total, product) => {
       return total + product.price * product.quantity;
@@ -22,6 +22,7 @@ const Cart = () => {
     return total ? total : 0;
   });
 
+  // Remove a specific product from the cart by its id
   function handleClickDelete(product) {
     const updateCart = cart.filter((item) => {
       return item.id !== product.id;
@@ -29,6 +30,7 @@ const Cart = () => {
     setAddToCart(updateCart);
   }
 
+  // Increase product quantity in cart if stock allows
   function handleClickPlus(product) {
     const updateCart = cart.map((item) => {
       if (item.id !== product.id) {
@@ -41,6 +43,7 @@ const Cart = () => {
     setAddToCart(updateCart);
   }
 
+  // Decrease product quantity in cart if it's more than 1
   function handleClickMinus(product) {
     const updateCart = cart.map((item) => {
       if (item.id !== product.id) {

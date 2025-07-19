@@ -16,16 +16,13 @@ const WishList = () => {
           {wishList.map((product) => {
             const inWishList = true;
             const inCart = cart.some((item) => item.id === product.id);
-
             return (
-              <>
-                <Card
-                  product={product}
-                  key={product.id}
-                  inWishList={inWishList}
-                  inCart={inCart}
-                />
-              </>
+              <Card
+                product={product}
+                key={product.id}
+                inWishList={inWishList}
+                inCart={inCart}
+              />
             );
           })}
         </div>

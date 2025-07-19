@@ -12,38 +12,43 @@ import { BsCartCheck } from "react-icons/bs";
 import ProductDetailsSkeleton from "./productDetailsSkeleton/ProductDetailsSkeleton";
 
 const ProductDetails = () => {
+  // // Store the fetched product data
   const [product, setProduct] = useState({});
+  // Track loading state while fetching product
   const [loading, setLoading] = useState(true);
+  // Main product image shown on product details page
   const [imgProduct, setImgProduct] = useState("");
+  // Index of the currently displayed main image
   const [activeImg, setActiveImg] = useState(0);
   const [inCart, setInCart] = useState(false);
 
   const { cart, setAddToCart } = useContext(CartContext);
   const { id } = useParams();
 
+  // Fetch product data by ID
   useEffect(() => {
-    try {
-      const fetchProduct = async () => {
+    const fetchProduct = async () => {
+      try {
         const response = await fetch(`https://dummyjson.com/products/${id}`);
         const data = await response.json();
         setProduct(data);
         setLoading(false);
         setImgProduct(data.images[0]);
-      };
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-      fetchProduct();
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+    fetchProduct();
+  }, [id]);
 
+  // Check if the product is in the cart and update inCart state
   useEffect(() => {
     cart.some((prod) => {
-      if (prod.id === product.id) {
-        setInCart(true);
-      }
+      const isInCart = cart.some((prod) => prod.id === product.id);
+      setInCart(isInCart);
     });
-  }, [loading]);
+  }, [loading, cart, product.id]);
 
   function handleClickBtnAddToCart() {
     setAddToCart([...cart, { ...product, quantity: 1 }]);

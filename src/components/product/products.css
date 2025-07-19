@@ -1,3 +1,7 @@
+.product:first-child {
+  padding-top: 100px;
+}
+
 .product h1 {
   font-size: 30px;
   margin: 35px 10px;

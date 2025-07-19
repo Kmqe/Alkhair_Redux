@@ -1,6 +1,9 @@
 import "./card.css";
+
+// Link component for navigation between routes
 import { Link } from "react-router-dom";
 
+// React Hooks
 import { useContext } from "react";
 import { CartContext, WishListContext } from "../context/ProductsContext";
 
@@ -12,26 +15,20 @@ import { FaHeart } from "react-icons/fa6";
 import { FaShare } from "react-icons/fa";
 import { BsCartCheck } from "react-icons/bs";
 
-const Card = ({
-  product,
-  inCart,
-  inWishList,
-  // handleClickBtnAddToCart,
-  // handleCLickBtnAddToWishList,
-}) => {
+const Card = ({ product, inCart, inWishList }) => {
   const { cart, setAddToCart } = useContext(CartContext);
   const { wishList, setWishList } = useContext(WishListContext);
 
+  // Add product to cart with initial quantity of 1
   function handleClickBtnAddToCart(product) {
     setAddToCart([...cart, { ...product, quantity: 1 }]);
   }
 
+  // Add or remove product from wishlist depending on its current presence
   function handleCLickBtnAddToWishList(product) {
     const find = wishList.some((item) => item.id === product.id);
     if (find) {
-      const newListOfWish = wishList.filter((item) =>
-        item.id !== product.id ? item : null
-      );
+      const newListOfWish = wishList.filter((item) => item.id !== product.id);
       setWishList(newListOfWish);
     } else {
       setWishList([...wishList, product]);

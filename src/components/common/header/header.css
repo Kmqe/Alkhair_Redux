@@ -1,5 +1,26 @@
 header {
   border-bottom: 1px solid #ddd;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 8;
+  width: 100%;
+  background-color: #fff;
+}
+
+header.fixed {
+  position: fixed;
+  animation-name: show_header;
+  animation-duration: 0.7s;
+}
+
+@keyframes show_header {
+  0% {
+    top: -150px;
+  }
+  100% {
+    top: 0;
+  }
 }
 
 header .container {
@@ -8,57 +29,65 @@ header .container {
   align-items: center;
   padding-top: 20px;
   padding-bottom: 20px;
+  gap: 20px;
 }
 
-header .logo {
+header .container .logo {
   width: 150px;
 }
 
-header .search {
+header .container .search {
   position: relative;
   border: 2px solid #329b6b;
-  width: 500px;
   border-radius: 5px;
+  max-width: 500px;
+  width: 100%;
 }
 
-header .search form {
+header .container .search form {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
 }
 
-header .search form input {
-  width: 100%;
+header .container .search form input {
   font-size: 18px;
+  width: 100%;
 }
 
-header .search form span {
+header .container .search form span {
   display: flex;
   align-items: center;
   position: absolute;
   font-size: 26px;
-  top: 50%;
+  /* top: 50%; */
   right: 20px;
-  transform: translateY(-50%);
+  /* transform: translateY(-50%); */
+  right: 0;
+  background-color: var(--primary_color);
+  height: 100%;
+  padding: 0 10px;
+  color: white;
+  cursor: pointer;
 }
 
-header .box-icon {
+/* For big Screen */
+header .container .box-icon {
   display: flex;
   gap: 30px;
 }
 
-header .box-icon .icon {
+header .container .box-icon .icon {
   font-size: 30px;
   position: relative;
-  /* background-color: red; */
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 }
 
-header .box-icon .icon span.count {
+header .container .box-icon .icon span.count {
   position: absolute;
   top: -5px;
   right: -8px;
@@ -72,4 +101,106 @@ header .box-icon .icon span.count {
   width: 20px;
   height: 20px;
   border-radius: 50px;
+}
+
+header .container .btn {
+  display: flex;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* For Small Screen */
+header .container .side-bar {
+  position: absolute;
+  top: 0;
+  right: -120vw;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99;
+  background-color: #f6f6f6;
+  padding: 50px;
+  transition: 0.4s;
+}
+
+header .container .side-bar.show {
+  right: 0;
+}
+
+header .container .side-bar .btn {
+  position: absolute;
+  right: 25px;
+  top: 25px;
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  padding: initial;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+header .container .side-bar .box-icon {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  margin-top: 50px;
+}
+
+header .container .search .list-of-results {
+  display: none;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  position: absolute;
+  margin-top: 1px;
+  width: 100%;
+  background-color: #f6f6f6;
+  border-radius: 0 0 5px 5px;
+}
+
+header .container .search .list-of-results.show {
+  display: block;
+}
+
+header .container .search .list-of-results a {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0 10px;
+}
+
+header .container .search .list-of-results a:hover {
+  background-color: #a7a7a723;
+}
+
+header .container .search .list-of-results a:last-child {
+  border: none;
+}
+
+header .container .search .list-of-results li {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  height: 61px;
+}
+
+header .container .search .list-of-results li img {
+  width: 40px;
+}
+
+header .container .search .list-of-results li p {
+  font-size: 14px;
+}
+
+/*  */
+@media screen and (max-width: 568px) {
+  header .container .search form {
+    padding: 10px 35px 10px 10px;
+  }
+
+  header .container .search form input {
+    font-size: 15px;
+    width: 100%;
+  }
+
+  header .container .search form span {
+    font-size: 20px;
+  }
 }

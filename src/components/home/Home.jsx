@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
 import Products from "../product/Products";
-import { CartContext } from "../context/ProductsContext";
 import ProductSkeleton from "../product/productSkeleton/ProductSkeleton";
+import { useEffect, useState } from "react";
+import { CartContext } from "../context/ProductsContext";
 
 const categories = [
   "beauty",

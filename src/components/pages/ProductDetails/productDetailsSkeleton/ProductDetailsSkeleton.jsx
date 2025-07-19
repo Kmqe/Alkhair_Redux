@@ -11,7 +11,6 @@ const ProductDetailsSkeleton = () => {
       <div className="container">
         <div className="imgs_items">
           <div className="big_img">
-            {/* <img src={imgProduct} alt={product.title} /> */}
             <Skeleton width={"95%"} height={"300px"} />
           </div>
           <div className="small_imgs">

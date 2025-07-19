@@ -1,36 +1,47 @@
+// React hooks
 import { useEffect, useState } from "react";
-import { Route, Router, Routes } from "react-router-dom";
+//React Router Components for page rouging
+import { Route, Routes } from "react-router-dom";
+// Common layout component
 import Header from "../common/header/Header";
+// Home page
 import Home from "../home/Home";
-import { CartContext } from "../context/ProductsContext";
+// Contexts for cart and wishlist
+import { CartContext, WishListContext } from "../context/ProductsContext";
+// Cart Page
 import Cart from "./cart/Cart";
+// Product details page
 import ProductDetails from "./ProductDetails/ProductDetails";
-import ProductDetailsSkeleton from "./ProductDetails/productDetailsSkeleton/ProductDetailsSkeleton";
+// Wishlist page
 import WishList from "./wishlist/WishList";
-import { WishListContext } from "../context/ProductsContext";
+// Products listing page by category
 import ProductsByCategory from "./ProductsByCategory/ProductsByCategory";
 
 const Pages = () => {
-  //
+  // Initialize cart from localStorage or set it to an empty array
   const [cart, setAddToCart] = useState(() => {
     const foundCart = JSON.parse(localStorage.getItem("cart"));
     return foundCart ? foundCart : [];
   });
 
+  // Initialize wishlist from localStorage or set it to an empty array
   const [wishList, setWishList] = useState(() => {
     const foundWishList = JSON.parse(localStorage.getItem("wish_list"));
     return foundWishList ? foundWishList : [];
   });
 
+  // Save cart to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
+  // Save wishlist to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem("wish_list", JSON.stringify(wishList));
   }, [wishList]);
   return (
     <>
+      {/* Provide cart and wishlist context to the entire app with routing setup*/}
       <CartContext.Provider value={{ cart, setAddToCart }}>
         <WishListContext.Provider value={{ wishList, setWishList }}>
           <Header />
