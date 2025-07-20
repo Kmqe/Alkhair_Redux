@@ -57,6 +57,8 @@ const Header = () => {
     fetchProductByInputSearch();
   }, [inputSearch]);
 
+  // searchAboutProducts
+
   return (
     <header className={`${scrollY >= 200 ? "fixed" : ""}`}>
       <div className="container">
@@ -72,9 +74,9 @@ const Header = () => {
               onFocus={() => setShowListOfSearch(true)}
               onBlur={() => setTimeout(() => setShowListOfSearch(false), 200)}
             />
-            <span>
+            <Link to={`./search?query=${inputSearch}`}>
               <IoIosSearch />
-            </span>
+            </Link>
           </form>
           <div
             className={`list-of-results ${

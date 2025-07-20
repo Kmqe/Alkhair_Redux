@@ -56,7 +56,7 @@ header .container .search form input {
   width: 100%;
 }
 
-header .container .search form span {
+header .container .search form a {
   display: flex;
   align-items: center;
   position: absolute;

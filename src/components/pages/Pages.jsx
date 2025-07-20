@@ -16,6 +16,8 @@ import ProductDetails from "./ProductDetails/ProductDetails";
 import WishList from "./wishlist/WishList";
 // Products listing page by category
 import ProductsByCategory from "./ProductsByCategory/ProductsByCategory";
+// Search Results page
+import SearchResults from "./SearchResults/SearchResults";
 
 const Pages = () => {
   // Initialize cart from localStorage or set it to an empty array
@@ -55,6 +57,7 @@ const Pages = () => {
               element={<ProductsByCategory />}
             />
             <Route path="wishlist/" element={<WishList />} />
+            <Route path="search" element={<SearchResults />} />
           </Routes>
         </WishListContext.Provider>
       </CartContext.Provider>
