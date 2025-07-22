@@ -1,5 +1,7 @@
 import "./product_details.css";
 
+import { format, compareAsc } from "date-fns";
+
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -37,6 +39,8 @@ const ProductDetails = () => {
   const [inCart, setInCart] = useState(false);
   const [rating, setRating] = useState([0]);
 
+  const [reviews, setReviews] = useState([]);
+
   const [productsOfArray, setProductsOfArray] = useState([]);
 
   const { cart, setAddToCart } = useContext(CartContext);
@@ -56,6 +60,7 @@ const ProductDetails = () => {
         );
         const data1 = await response2.json();
         setProduct(data);
+        setReviews(data.reviews);
         setLoading(false);
         setImgProduct(data.images[0]);
         setRating(Array(Math.ceil(data.rating)).fill(0));
@@ -90,6 +95,11 @@ const ProductDetails = () => {
     }
   }
 
+  // reviews.map((review) => {
+  //   console.log(review);
+  // });
+  // console.log(reviews);
+  // const rating = Array(Math.ceil(product.rating)).fill(0);
   return loading ? (
     <ProductDetailsSkeleton />
   ) : (
@@ -212,7 +222,49 @@ const ProductDetails = () => {
         </div>
 
         <div className="comments-content">
-          <h1>Hello</h1>
+          <h1>Reviews</h1>
+          {reviews.map((review, index) => {
+            return (
+              <div className="comment-block" key={index}>
+                <div className="customer-info">
+                  <span className="avtar">{review.reviewerName.charAt(0)}</span>
+                  <div className="name-date">
+                    <p className="customer-name">{review.reviewerName}</p>
+                    {/* <p className="date-publish">{review.date}</p> */}
+                    <p className="date-publish">
+                      {format(review.date, "MMM dd, yyyy")}
+                    </p>
+                  </div>
+                </div>
+                <div className="customer-rating">
+                  {Array(5)
+                    .fill(0)
+                    .map((star, index) =>
+                      review.rating < index + 1 ? (
+                        <FaStar key={index} color="ccc" />
+                      ) : (
+                        <FaStar
+                          key={index}
+                          className={`stars-${review.rating}`}
+                        />
+                      )
+                    )}
+                </div>
+                <p className="customer-comment">{review.comment}</p>
+              </div>
+            );
+          })}
+          {/* <div className="comment-block">
+            <div className="customer-info">
+              <span className="avtar"></span>
+              <div className="name-date">
+                <p className="customer-name"></p>
+                <p className="date-publish"></p>
+              </div>
+            </div>
+            <div className="customer-rating"></div>
+            <p className="customer-comment"></p>
+          </div> */}
         </div>
       </div>
     </section>

@@ -137,3 +137,59 @@
 .product_details .container .products-category img {
   width: 130px;
 }
+
+.product_details .container .comments-content h1 {
+  padding-bottom: 20px;
+  border-bottom: 2px solid rgba(128, 128, 128, 0.144);
+  margin-bottom: 30px;
+}
+
+.product_details .container .comments-content .comment-block {
+  margin-bottom: 30px;
+  border-bottom: 2px solid rgba(128, 128, 128, 0.082);
+}
+
+.product_details .container .comments-content .customer-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.product_details .container .comments-content .customer-info .avtar {
+  background-color: #eff3fd;
+  color: #9ba0b1;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.product_details .container .comments-content .customer-rating {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.product_details .container .comments-content .customer-comment {
+  margin-bottom: 25px;
+}
+
+.stars-5 {
+  color: #2f9303;
+}
+
+.stars-4 {
+  color: #6e9303;
+}
+
+.stars-3 {
+  color: #ce9229;
+}
+
+.stars-2,
+.stars-1 {
+  color: #ce5b2a;
+}
