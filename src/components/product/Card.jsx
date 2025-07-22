@@ -35,6 +35,8 @@ const Card = ({ product, inCart, inWishList }) => {
     }
   }
 
+  const rating = Array(Math.ceil(product.rating)).fill(0);
+
   return (
     <div className="card_product">
       <div className="img_content">
@@ -67,11 +69,9 @@ const Card = ({ product, inCart, inWishList }) => {
           <h3 title={product.title}>{product.title}</h3>
         </Link>
         <div className="rating">
-          <FaStar />
-          <FaStar />
-          <FaStar />
-          <FaStar />
-          <FaStar />
+          {rating.map((_, index) => (
+            <FaStar key={index} />
+          ))}
         </div>
         {product.brand ? (
           <p className="brand">

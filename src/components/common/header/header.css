@@ -61,15 +61,17 @@ header .container .search form a {
   align-items: center;
   position: absolute;
   font-size: 26px;
-  /* top: 50%; */
   right: 20px;
-  /* transform: translateY(-50%); */
   right: 0;
   background-color: var(--primary_color);
   height: 100%;
   padding: 0 10px;
   color: white;
   cursor: pointer;
+}
+
+header .container .search form a.disabled {
+  pointer-events: none;
 }
 
 /* For big Screen */

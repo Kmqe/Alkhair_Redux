@@ -1,0 +1,36 @@
+.skeleton_grid_products {
+  padding-top: 100px;
+}
+
+.skeleton_grid_products .container h1 {
+  margin: 30px 10px;
+  font-size: 40px;
+}
+
+.skeleton_grid_products .container .products_container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  padding: 0 10px;
+}
+
+@media screen and (max-width: 1200px) {
+  .skeleton_grid_products .container .products_container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .skeleton_grid_products .container .products_container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .skeleton_grid_products .container .products_container {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+}

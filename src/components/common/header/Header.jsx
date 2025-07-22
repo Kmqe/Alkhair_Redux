@@ -43,21 +43,24 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    const fetchProductByInputSearch = async () => {
-      try {
-        const res = await fetch(
-          `https://dummyjson.com/products/search?q=${inputSearch}`
-        );
-        const data = await res.json();
-        setProductsOfSearch(data.products.splice(0, 5));
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchProductByInputSearch();
-  }, [inputSearch]);
+    const timer = setTimeout(() => {
+      const fetchProductByInputSearch = async () => {
+        try {
+          const res = await fetch(
+            `https://dummyjson.com/products/search?q=${inputSearch}`
+          );
+          const data = await res.json();
+          setProductsOfSearch(data.products.splice(0, 5));
+          console.log("A");
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchProductByInputSearch();
+    }, 1000);
 
-  // searchAboutProducts
+    return () => clearTimeout(timer);
+  }, [inputSearch]);
 
   return (
     <header className={`${scrollY >= 200 ? "fixed" : ""}`}>
@@ -74,7 +77,10 @@ const Header = () => {
               onFocus={() => setShowListOfSearch(true)}
               onBlur={() => setTimeout(() => setShowListOfSearch(false), 200)}
             />
-            <Link to={`./search?query=${inputSearch}`}>
+            <Link
+              className={inputSearch.length ? "" : "disabled"}
+              to={`./search?query=${inputSearch}`}
+            >
               <IoIosSearch />
             </Link>
           </form>

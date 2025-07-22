@@ -4,6 +4,8 @@ import ProductSkeleton from "../../product/productSkeleton/ProductSkeleton";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CartContext, WishListContext } from "../../context/ProductsContext";
+import Skeleton from "react-loading-skeleton";
+import SkeletonGridProducts from "../../skeleton_grid_products/SkeletonGridProducts";
 
 const ProductsByCategory = () => {
   // Store products from the same category
@@ -33,7 +35,7 @@ const ProductsByCategory = () => {
   }, [category]);
 
   return loading ? (
-    <ProductSkeleton />
+    <SkeletonGridProducts />
   ) : (
     <section className="products_by_category">
       <div className="container">
