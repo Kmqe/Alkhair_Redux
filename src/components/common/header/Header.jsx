@@ -1,10 +1,13 @@
 import "./header.css";
+// Import the website logo image
 import logo from "/images/logo.png";
-
+// Import React Hooks
 import { useContext, useEffect, useState } from "react";
+
 import { CartContext } from "../../context/ProductsContext";
 import { WishListContext } from "../../context/ProductsContext";
 
+// Import Link component to navigate between pages without reloading
 import { Link } from "react-router-dom";
 
 // ICONS
@@ -16,29 +19,39 @@ import { FaBars } from "react-icons/fa";
 import { CgClose } from "react-icons/cg";
 
 const Header = () => {
+  // State to store the current screen width
   const [widthScreen, setWidthScreen] = useState(window.innerWidth);
+  // State to control sidebar visibility (only shown on small screens)
   const [openSideBar, setOpenSideBar] = useState(false);
+  // State to store the current scroll position (used to show/hide header or navbar)
   const [scrollY, setScrollY] = useState(window.scrollY);
+  // State to store the search text entered by the user for filtering products
   const [inputSearch, setInputSearch] = useState("");
+  // State to store the list of products that match the search query (5 products only)
   const [productsOfSearch, setProductsOfSearch] = useState([]);
+  // Controls visibility of search suggestions; shown when search input is focused
   const [showListOfSearch, setShowListOfSearch] = useState(false);
 
   const { cart } = useContext(CartContext);
   const { wishList } = useContext(WishListContext);
 
+  // Update the screen width state whenever the window is resized
   useEffect(() => {
     function calcSize() {
       setWidthScreen(window.innerWidth);
     }
     window.addEventListener("resize", calcSize);
+    // Clean up the event listener on component unmount
     return () => window.removeEventListener("resize", calcSize);
   }, []);
 
+  // Update scroll position state when the user scrolls the page
   useEffect(() => {
     function calcScrollY() {
       setScrollY(window.scrollY);
     }
     window.addEventListener("scroll", calcScrollY);
+    // Clean up the event listener when component unmounts
     return () => window.removeEventListener("scroll", calcScrollY);
   }, []);
 
@@ -51,7 +64,6 @@ const Header = () => {
           );
           const data = await res.json();
           setProductsOfSearch(data.products.splice(0, 5));
-          console.log("A");
         } catch (error) {
           console.log(error);
         }
@@ -95,7 +107,7 @@ const Header = () => {
                     <Link to={`/products/${product.id}`} key={product.id}>
                       <li key={product.id}>
                         <img src={product.images[0]} />
-                        <p>{product.title}</p>
+                        <p title={product.title}>{product.title}</p>
                       </li>
                     </Link>
                   ))

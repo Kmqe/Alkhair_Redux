@@ -1,7 +1,6 @@
 import Products from "../product/Products";
 import ProductSkeleton from "../product/productSkeleton/ProductSkeleton";
 import { useEffect, useState } from "react";
-import { CartContext } from "../context/ProductsContext";
 
 const categories = [
   "beauty",

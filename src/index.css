@@ -85,6 +85,10 @@ a {
   text-align: center;
 }
 
+/* h1.title-section-products {
+
+} */
+
 /* Small screens (tablets, ≥768px) */
 @media (min-width: 768px) {
   .container {

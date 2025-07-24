@@ -29,7 +29,7 @@ header .container {
   align-items: center;
   padding-top: 20px;
   padding-bottom: 20px;
-  gap: 20px;
+  gap: 15px;
 }
 
 header .container .logo {
@@ -107,8 +107,12 @@ header .container .box-icon .icon span.count {
 
 header .container .btn {
   display: flex;
+  align-items: center;
   font-size: 20px;
   cursor: pointer;
+  outline: none;
+  padding: 10px 10px;
+  border-radius: 5px;
 }
 
 /* For Small Screen */
@@ -189,6 +193,11 @@ header .container .search .list-of-results li img {
 
 header .container .search .list-of-results li p {
   font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 /*  */

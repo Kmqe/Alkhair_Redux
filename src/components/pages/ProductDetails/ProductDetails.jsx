@@ -1,10 +1,11 @@
 import "./product_details.css";
-
-import { format, compareAsc } from "date-fns";
-
+// Import the format function from date-fns to format dates
+import { format } from "date-fns";
+// Import React Hooks
 import { useContext, useEffect, useState } from "react";
+// Get URL parameters using useParams from react-router-dom
 import { useParams } from "react-router-dom";
-
+// Import Cart and WishList contexts to access shared data
 import { CartContext, WishListContext } from "../../context/ProductsContext";
 
 // ICONS
@@ -24,7 +25,9 @@ import "swiper/css/pagination";
 // import required modules
 import { Navigation } from "swiper/modules";
 
+// Import the loading skeleton component for product details
 import ProductDetailsSkeleton from "./productDetailsSkeleton/ProductDetailsSkeleton";
+// Import the Card component to display a product
 import Card from "../../product/Card";
 
 const ProductDetails = () => {
@@ -36,40 +39,47 @@ const ProductDetails = () => {
   const [imgProduct, setImgProduct] = useState("");
   // Index of the currently displayed main image
   const [activeImg, setActiveImg] = useState(0);
+  // State to check if the product is in the cart
   const [inCart, setInCart] = useState(false);
+  // State to store product rating as an array (used for stars display)
   const [rating, setRating] = useState([0]);
-
+  // State to store product reviews
   const [reviews, setReviews] = useState([]);
-
-  const [productsOfArray, setProductsOfArray] = useState([]);
+  // State to store products fetched from the category API
+  const [categoryProducts, setCategoryProducts] = useState([]);
 
   const { cart, setAddToCart } = useContext(CartContext);
   const { wishList, setWishList } = useContext(WishListContext);
+  // Get the product ID from the URL parameters
   const { id } = useParams();
 
+  // Check if the current product is in the wish list
   const inWishList = wishList.some((item) => item.id === product.id);
 
   // Fetch product data by ID
   useEffect(() => {
     const fetchProduct = async () => {
       try {
+        // Fetch the main product by ID
         const response = await fetch(`https://dummyjson.com/products/${id}`);
-        const data = await response.json();
-        const response2 = await fetch(
-          `https://dummyjson.com/products/category/${data.category}`
+        const product = await response.json();
+
+        // Fetch products from same category
+        const categoryResponse = await fetch(
+          `https://dummyjson.com/products/category/${product.category}`
         );
-        const data1 = await response2.json();
-        setProduct(data);
-        setReviews(data.reviews);
+        const category = await categoryResponse.json();
+
+        setProduct(product);
+        setReviews(product.reviews);
         setLoading(false);
-        setImgProduct(data.images[0]);
-        setRating(Array(Math.ceil(data.rating)).fill(0));
-        setProductsOfArray(data1.products);
+        setImgProduct(product.images[0]);
+        setRating(Array(Math.ceil(product.rating)).fill(0));
+        setCategoryProducts(category.products);
       } catch (error) {
-        console.log(error);
+        console.log("Failed to fetch product:", error);
       }
     };
-
     fetchProduct();
   }, [id]);
 
@@ -95,11 +105,6 @@ const ProductDetails = () => {
     }
   }
 
-  // reviews.map((review) => {
-  //   console.log(review);
-  // });
-  // console.log(reviews);
-  // const rating = Array(Math.ceil(product.rating)).fill(0);
   return loading ? (
     <ProductDetailsSkeleton />
   ) : (
@@ -202,7 +207,7 @@ const ProductDetails = () => {
             modules={[Navigation]}
             className="mySwiper"
           >
-            {productsOfArray.map((product) => {
+            {categoryProducts.map((product) => {
               const inCart = cart.some((item) => item.id === product.id);
               const inWishList = wishList.some(
                 (item) => item.id === product.id
@@ -254,17 +259,6 @@ const ProductDetails = () => {
               </div>
             );
           })}
-          {/* <div className="comment-block">
-            <div className="customer-info">
-              <span className="avtar"></span>
-              <div className="name-date">
-                <p className="customer-name"></p>
-                <p className="date-publish"></p>
-              </div>
-            </div>
-            <div className="customer-rating"></div>
-            <p className="customer-comment"></p>
-          </div> */}
         </div>
       </div>
     </section>
