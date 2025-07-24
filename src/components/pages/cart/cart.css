@@ -26,6 +26,8 @@
 
 .cart-page .container .cart_products .cart-row:first-child {
   margin-top: 30px;
+  padding: 20px 0;
+  background-color: #ddd;
 }
 
 .cart-page .container .cart_products .cart-row:not(:first-child) {
