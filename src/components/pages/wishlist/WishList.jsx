@@ -11,7 +11,7 @@ const WishList = () => {
   return (
     <section className="wish-list">
       <div className="container">
-        <h1>My Wish List</h1>
+        <h1 className="title-section">My Wish List</h1>
         <div className="products_container">
           {wishList.map((product) => {
             const inWishList = true;

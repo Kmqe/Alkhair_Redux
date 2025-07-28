@@ -72,7 +72,7 @@ const ProductDetails = () => {
 
         setProduct(product);
         setReviews(product.reviews);
-        setLoading(false);
+        // setLoading(false);
         setImgProduct(product.images[0]);
         setRating(Array(Math.ceil(product.rating)).fill(0));
         setCategoryProducts(category.products);
@@ -130,7 +130,7 @@ const ProductDetails = () => {
             </div>
           </div>
           <div className="product_info">
-            <h1 className="title">{product.title}</h1>
+            <h1 className="title-section">{product.title}</h1>
             <div className="rating">
               {rating.map((_, index) => (
                 <FaStar key={index} />
@@ -184,7 +184,7 @@ const ProductDetails = () => {
         </div>
 
         <div className="products-category">
-          <h1>{product.category}</h1>
+          <h1 className="title-section">{product.category}</h1>
 
           <Swiper
             slidesPerView={4}

@@ -22,22 +22,22 @@ const ProductDetailsSkeleton = () => {
           </div>
           <div className="product_info">
             <h1 className="title">
-              <Skeleton width={"100%"} />
+              <Skeleton width={"120%"} />
             </h1>
 
             <h2 className="price">
-              <Skeleton width={100} />{" "}
+              <Skeleton width={150} />{" "}
             </h2>
             <strong className="availability strong">
-              <Skeleton width={90} />{" "}
+              <Skeleton width={100} />{" "}
               <span>
-                <Skeleton width={40} />
+                <Skeleton width={50} />
               </span>
             </strong>
             <strong className="availability strong">
-              <Skeleton width={90} />{" "}
+              <Skeleton width={100} />{" "}
               <span>
-                <Skeleton width={40} />
+                <Skeleton width={50} />
               </span>
             </strong>
 
@@ -45,8 +45,12 @@ const ProductDetailsSkeleton = () => {
               <Skeleton width={400} />
             </p>
             <p className="description">
-              <Skeleton width={200} />
+              <Skeleton width={400} />
             </p>
+            <div style={{ display: "flex", gap: "20px" }}>
+              <Skeleton width={50} height={50} style={{ marginTop: "20px" }} />
+              <Skeleton width={50} height={50} style={{ marginTop: "20px" }} />
+            </div>
             <h1>
               <Skeleton width={200} height={50} style={{ marginTop: "30px" }} />
             </h1>

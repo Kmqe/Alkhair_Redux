@@ -40,12 +40,6 @@
   border-color: rgb(0, 0, 0);
 }
 
-.product_details .container .row1 .title {
-  color: var(--primary_color);
-  margin-bottom: 15px;
-  font-size: 40px;
-}
-
 .product_details .container .row1 .rating {
   color: gold;
   margin-bottom: 15px;
@@ -128,12 +122,6 @@
   margin-bottom: 100px;
 }
 
-.product_details .container .products-category h1 {
-  font-size: 40px;
-  margin-bottom: 40px;
-  color: var(--primary_color);
-}
-
 .product_details .container .products-category img {
   width: 130px;
 }
@@ -214,8 +202,10 @@
   .product_details .container .row1 .product_info {
     margin-top: 50px;
   }
+}
 
-  .product_details .container .row1 .title {
-    font-size: 30px;
+@media screen and (max-width: 568) {
+  .product_details {
+    padding: 100px;
   }
 }

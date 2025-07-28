@@ -21,7 +21,7 @@ const Products = ({ category, productsOfArray }) => {
 
   return (
     <section className="product">
-      <h1>{category.replaceAll("-", " ")}</h1>
+      <h1 className="title-section">{category.replaceAll("-", " ")}</h1>
       <>
         <Swiper
           slidesPerView={4}

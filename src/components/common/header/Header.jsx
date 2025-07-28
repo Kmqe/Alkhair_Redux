@@ -145,15 +145,23 @@ const Header = () => {
                 <CgClose />
               </button>
               <div className={`box-icon`}>
-                <Link to={"/wishlist"} className="icon">
+                <Link
+                  to={"/wishlist"}
+                  className="icon"
+                  onClick={() => setOpenSideBar(false)}
+                >
                   <FaRegHeart />
                   <span className="count">{wishList.length}</span>
                 </Link>
-                <Link to={"/cart"} className="icon">
+                <Link
+                  to={"/cart"}
+                  className="icon"
+                  onClick={() => setOpenSideBar(false)}
+                >
                   <TiShoppingCart />
                   <span className="count">{cart.length}</span>
                 </Link>
-                <div className="icon">
+                <div className="icon" onClick={() => setOpenSideBar(false)}>
                   <IoPerson />
                 </div>
               </div>

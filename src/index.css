@@ -85,9 +85,11 @@ a {
   text-align: center;
 }
 
-/* h1.title-section-products {
-
-} */
+h1.title-section {
+  margin: 30px 10px 25px;
+  font-size: 40px;
+  color: var(--primary_color);
+}
 
 /* Small screens (tablets, ≥768px) */
 @media (min-width: 768px) {
@@ -111,5 +113,11 @@ a {
 @media (min-width: 1400px) {
   .container {
     width: 1370px;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  h1.title-section {
+    font-size: 30px;
   }
 }

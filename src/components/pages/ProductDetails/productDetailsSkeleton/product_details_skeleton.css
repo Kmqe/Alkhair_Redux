@@ -5,3 +5,10 @@
 .product_details.place-holder .container .small_imgs {
   margin-top: 20px;
 }
+
+@media screen and (max-width: 568px) {
+  .product_details.place-holder [aria-live="polite"] {
+    /* display: flex; */
+    /* justify-content: center; */
+  }
+}

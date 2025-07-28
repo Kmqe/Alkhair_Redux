@@ -3,11 +3,6 @@
   padding-bottom: 50px;
 }
 
-.wish-list .container h1 {
-  margin: 30px 10px;
-  font-size: 40px;
-}
-
 .wish-list .container .products_container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

@@ -29,7 +29,7 @@ header .container {
   align-items: center;
   padding-top: 20px;
   padding-bottom: 20px;
-  gap: 15px;
+  gap: 10px;
 }
 
 header .container .logo {
