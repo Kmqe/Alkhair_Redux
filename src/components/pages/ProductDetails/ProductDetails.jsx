@@ -72,7 +72,7 @@ const ProductDetails = () => {
 
         setProduct(product);
         setReviews(product.reviews);
-        // setLoading(false);
+        setLoading(false);
         setImgProduct(product.images[0]);
         setRating(Array(Math.ceil(product.rating)).fill(0));
         setCategoryProducts(category.products);

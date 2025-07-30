@@ -75,101 +75,100 @@ const Header = () => {
   }, [inputSearch]);
 
   return (
-    <header className={`${scrollY >= 200 ? "fixed" : ""}`}>
-      <div className="container">
-        <div className="logo">
-          <img src={logo} />
-        </div>
-        <div className="search">
-          <form>
-            <input
-              type="text"
-              placeholder="Search for items"
-              onChange={(e) => setInputSearch(e.target.value)}
-              onFocus={() => setShowListOfSearch(true)}
-              onBlur={() => setTimeout(() => setShowListOfSearch(false), 200)}
-            />
-            <Link
-              className={inputSearch.length ? "" : "disabled"}
-              to={`./search?query=${inputSearch}`}
-            >
-              <IoIosSearch />
-            </Link>
-          </form>
-          <div
-            className={`list-of-results ${
-              showListOfSearch && inputSearch.length > 0 ? "show" : ""
-            }`}
-          >
-            <ul>
-              {inputSearch.length > 0
-                ? productsOfSearch.map((product) => (
-                    <Link to={`/products/${product.id}`} key={product.id}>
-                      <li key={product.id}>
-                        <img src={product.images[0]} />
-                        <p title={product.title}>{product.title}</p>
-                      </li>
-                    </Link>
-                  ))
-                : ""}
-            </ul>
+    <>
+      <header className={`${scrollY >= 200 ? "fixed" : ""}`}>
+        <div className="container">
+          <div className="logo">
+            <img src={logo} />
           </div>
-        </div>
-        {widthScreen > 768 ? (
-          <div className={`box-icon`}>
-            <Link to={"/wishlist"} className="icon">
-              <FaRegHeart />
-              <span className="count">{wishList.length}</span>
-            </Link>
-            <Link to={"/cart"} className="icon">
-              <TiShoppingCart />
-              <span className="count">{cart.length}</span>
-            </Link>
-            <div className="icon">
-              <IoPerson />
+          <div className="search">
+            <form>
+              <input
+                type="text"
+                placeholder="Search for items"
+                onChange={(e) => setInputSearch(e.target.value)}
+                onFocus={() => setShowListOfSearch(true)}
+                onBlur={() => setTimeout(() => setShowListOfSearch(false), 200)}
+              />
+              <Link
+                className={inputSearch.length ? "" : "disabled"}
+                to={`./search?query=${inputSearch}`}
+              >
+                <IoIosSearch />
+              </Link>
+            </form>
+            <div
+              className={`list-of-results ${
+                showListOfSearch && inputSearch.length > 0 ? "show" : ""
+              }`}
+            >
+              <ul>
+                {inputSearch.length > 0
+                  ? productsOfSearch.map((product) => (
+                      <Link to={`/products/${product.id}`} key={product.id}>
+                        <li key={product.id}>
+                          <img src={product.images[0]} />
+                          <p title={product.title}>{product.title}</p>
+                        </li>
+                      </Link>
+                    ))
+                  : ""}
+              </ul>
             </div>
           </div>
-        ) : (
-          <>
-            <button
-              className="btn"
-              onClick={() => setOpenSideBar(!openSideBar)}
-            >
-              <FaBars />
-            </button>
-            <div className={`side-bar ${openSideBar ? "show" : ""}`}>
+          {widthScreen > 768 ? (
+            <div className={`box-icon`}>
+              <Link to={"/wishlist"} className="icon">
+                <FaRegHeart />
+                <span className="count">{wishList.length}</span>
+              </Link>
+              <Link to={"/cart"} className="icon">
+                <TiShoppingCart />
+                <span className="count">{cart.length}</span>
+              </Link>
+              <div className="icon">
+                <IoPerson />
+              </div>
+            </div>
+          ) : (
+            <>
               <button
                 className="btn"
                 onClick={() => setOpenSideBar(!openSideBar)}
               >
-                <CgClose />
+                <FaBars />
               </button>
-              <div className={`box-icon`}>
-                <Link
-                  to={"/wishlist"}
-                  className="icon"
-                  onClick={() => setOpenSideBar(false)}
-                >
-                  <FaRegHeart />
-                  <span className="count">{wishList.length}</span>
-                </Link>
-                <Link
-                  to={"/cart"}
-                  className="icon"
-                  onClick={() => setOpenSideBar(false)}
-                >
-                  <TiShoppingCart />
-                  <span className="count">{cart.length}</span>
-                </Link>
-                <div className="icon" onClick={() => setOpenSideBar(false)}>
-                  <IoPerson />
-                </div>
-              </div>
-            </div>
-          </>
-        )}
+            </>
+          )}
+        </div>
+      </header>
+      <div className={`side-bar ${openSideBar ? "show" : ""}`}>
+        <button className="btn" onClick={() => setOpenSideBar(!openSideBar)}>
+          <CgClose />
+        </button>
+        <div className={`box-icon`}>
+          <Link
+            to={"/wishlist"}
+            className="icon"
+            onClick={() => setOpenSideBar(false)}
+          >
+            <FaRegHeart />
+            <span className="count">{wishList.length}</span>
+          </Link>
+          <Link
+            to={"/cart"}
+            className="icon"
+            onClick={() => setOpenSideBar(false)}
+          >
+            <TiShoppingCart />
+            <span className="count">{cart.length}</span>
+          </Link>
+          <div className="icon" onClick={() => setOpenSideBar(false)}>
+            <IoPerson />
+          </div>
+        </div>
       </div>
-    </header>
+    </>
   );
 };
 

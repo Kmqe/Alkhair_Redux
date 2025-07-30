@@ -30,6 +30,8 @@ header .container {
   padding-top: 20px;
   padding-bottom: 20px;
   gap: 10px;
+  overflow-x: hidden;
+  position: relative;
 }
 
 header .container .logo {
@@ -113,13 +115,14 @@ header .container .btn {
   outline: none;
   padding: 10px 10px;
   border-radius: 5px;
+  color: #000;
 }
 
 /* For Small Screen */
-header .container .side-bar {
-  position: absolute;
+.side-bar {
+  position: fixed;
   top: 0;
-  right: -120vw;
+  right: -101vw;
   width: 100vw;
   height: 100vh;
   z-index: 99;
@@ -128,15 +131,16 @@ header .container .side-bar {
   transition: 0.4s;
 }
 
-header .container .side-bar.show {
+.side-bar.show {
   right: 0;
 }
 
-header .container .side-bar .btn {
+.side-bar .btn {
   position: absolute;
   right: 25px;
   top: 25px;
   border-radius: 50px;
+  font-size: 20px;
   width: 50px;
   height: 50px;
   padding: initial;
@@ -144,13 +148,45 @@ header .container .side-bar .btn {
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  color: #000;
+  cursor: pointer;
 }
 
-header .container .side-bar .box-icon {
+.side-bar .box-icon {
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
   margin-top: 50px;
+}
+
+.side-bar .box-icon {
+  display: flex;
+  gap: 30px;
+}
+
+.side-bar .box-icon .icon {
+  font-size: 30px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.side-bar .box-icon .icon span.count {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: normal;
+  background-color: #329b6b;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
 }
 
 header .container .search .list-of-results {
