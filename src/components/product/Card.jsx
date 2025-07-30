@@ -37,11 +37,20 @@ const Card = ({ product, inCart, inWishList }) => {
 
   const rating = Array(Math.ceil(product.rating)).fill(0);
 
+  function scrollToTop() {
+    console.log("A");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // إذا أردت تمرير ناعم (اختياري)
+    });
+  }
+
   return (
     <div className="card_product">
       <div className="img_content">
         <Link to={`/products/${product.id}`}>
           <img
+            onClick={() => scrollToTop()}
             src={product.thumbnail}
             alt={product.title}
             className="card_img"
@@ -65,7 +74,7 @@ const Card = ({ product, inCart, inWishList }) => {
       </div>
       <div className="card_info">
         <p>{product.category}</p>
-        <Link to={`/products/${product.id}`}>
+        <Link to={`/products/${product.id}`} onClick={() => scrollToTop()}>
           <h3 title={product.title}>{product.title}</h3>
         </Link>
         <div className="rating">
