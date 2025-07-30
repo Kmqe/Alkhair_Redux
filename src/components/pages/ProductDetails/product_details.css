@@ -132,7 +132,7 @@
   margin-bottom: 30px;
 }
 
-.product_details .container .comments-content .comment-block {
+.product_details .container .comments-content .comment-block:not(:last-child) {
   margin-bottom: 30px;
   border-bottom: 2px solid rgba(128, 128, 128, 0.082);
 }

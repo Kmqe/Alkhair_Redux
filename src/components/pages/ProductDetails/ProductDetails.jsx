@@ -105,6 +105,13 @@ const ProductDetails = () => {
     }
   }
 
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // إذا أردت تمرير ناعم (اختياري)
+    });
+  }
+
   return loading ? (
     <ProductDetailsSkeleton />
   ) : (
@@ -214,7 +221,7 @@ const ProductDetails = () => {
               );
 
               return (
-                <SwiperSlide key={product.id}>
+                <SwiperSlide key={product.id} onClick={() => scrollToTop()}>
                   <Card
                     product={product}
                     inCart={inCart}
