@@ -29,6 +29,7 @@ import { Navigation } from "swiper/modules";
 import ProductDetailsSkeleton from "./productDetailsSkeleton/ProductDetailsSkeleton";
 // Import the Card component to display a product
 import Card from "../../product/Card";
+import ScrollToTop from "../../ScrollToTop";
 
 const ProductDetails = () => {
   // Store the fetched product data
@@ -105,18 +106,11 @@ const ProductDetails = () => {
     }
   }
 
-  // function scrollToTop() {
-  //   console.log("A");
-  //   window.scrollTo({
-  //     top: 0,
-  //     behavior: "smooth", // إذا أردت تمرير ناعم (اختياري)
-  //   });
-  // }
-
   return loading ? (
     <ProductDetailsSkeleton />
   ) : (
     <section className="product_details">
+      <ScrollToTop />
       <div className="container">
         <div className="row1">
           <div className="imgs_items">
