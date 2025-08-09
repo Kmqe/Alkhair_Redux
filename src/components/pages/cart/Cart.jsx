@@ -36,6 +36,7 @@ const Cart = () => {
     return () => window.removeEventListener("resize", calcSize);
   }, []);
 
+  // =================================================================================== \\
   // Remove a specific product from the cart by its id
   function handleClickDelete(product) {
     const updateCart = cart.filter((item) => {

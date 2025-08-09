@@ -1,10 +1,8 @@
 import "./products_by_category.css";
 import Card from "../../product/Card";
-import ProductSkeleton from "../../product/productSkeleton/ProductSkeleton";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CartContext, WishListContext } from "../../context/ProductsContext";
-import Skeleton from "react-loading-skeleton";
 import SkeletonGridProducts from "../../skeleton_grid_products/SkeletonGridProducts";
 
 const ProductsByCategory = () => {
@@ -39,7 +37,7 @@ const ProductsByCategory = () => {
   ) : (
     <section className="products_by_category">
       <div className="container">
-        <h1>{category}</h1>
+        <h1 className="title-section">{category}</h1>
 
         <div className="products_container">
           {productsOfCategory.map((product) => {

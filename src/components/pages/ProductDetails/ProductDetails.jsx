@@ -23,7 +23,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 // import required modules
-import { Navigation } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 
 // Import the loading skeleton component for product details
 import ProductDetailsSkeleton from "./productDetailsSkeleton/ProductDetailsSkeleton";
@@ -50,7 +50,7 @@ const ProductDetails = () => {
   const [categoryProducts, setCategoryProducts] = useState([]);
 
   const { cart, setAddToCart } = useContext(CartContext);
-  const { wishList, setWishList } = useContext(WishListContext);
+  const { wishList, handleCLickBtnAddToWishList } = useContext(WishListContext);
   // Get the product ID from the URL parameters
   const { id } = useParams();
 
@@ -84,6 +84,7 @@ const ProductDetails = () => {
     fetchProduct();
   }, [id]);
 
+  ///////////////////////////////////////////////////////////////////////////////////////////
   // Check if the product is in the cart and update inCart state
   useEffect(() => {
     const isInCart = cart.some((prod) => prod.id === product.id);
@@ -93,17 +94,6 @@ const ProductDetails = () => {
   function handleClickBtnAddToCart() {
     setAddToCart([...cart, { ...product, quantity: 1 }]);
     setInCart(true);
-  }
-
-  // Add or remove product from wishlist depending on its current presence
-  function handleCLickBtnAddToWishList(product) {
-    const find = wishList.some((item) => item.id === product.id);
-    if (find) {
-      const newListOfWish = wishList.filter((item) => item.id !== product.id);
-      setWishList(newListOfWish);
-    } else {
-      setWishList([...wishList, product]);
-    }
   }
 
   return loading ? (
@@ -187,8 +177,12 @@ const ProductDetails = () => {
 
         <div className="products-category">
           <h1 className="title-section">{product.category}</h1>
-
           <Swiper
+            loop={true}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
             slidesPerView={4}
             breakpoints={{
               0: {
@@ -206,7 +200,7 @@ const ProductDetails = () => {
             }}
             spaceBetween={30}
             navigation={true}
-            modules={[Navigation]}
+            modules={[Navigation, Autoplay]}
             className="mySwiper"
           >
             {categoryProducts.map((product) => {

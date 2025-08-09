@@ -11,7 +11,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 // import required modules
-import { Navigation } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 
 import Card from "./Card";
 
@@ -24,6 +24,11 @@ const Products = ({ category, productsOfArray }) => {
       <h1 className="title-section">{category.replaceAll("-", " ")}</h1>
       <>
         <Swiper
+          loop={true}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
           slidesPerView={4}
           breakpoints={{
             0: {
@@ -41,7 +46,7 @@ const Products = ({ category, productsOfArray }) => {
           }}
           spaceBetween={30}
           navigation={true}
-          modules={[Navigation]}
+          modules={[Navigation, Autoplay]}
           className="mySwiper"
         >
           {productsOfArray.map((product) => {

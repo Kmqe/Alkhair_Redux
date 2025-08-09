@@ -41,11 +41,24 @@ const Pages = () => {
   useEffect(() => {
     localStorage.setItem("wish_list", JSON.stringify(wishList));
   }, [wishList]);
+
+  // Add or remove product from wishlist depending on its current presence
+  function handleCLickBtnAddToWishList(product) {
+    const find = wishList.some((item) => item.id === product.id);
+    if (find) {
+      const newListOfWish = wishList.filter((item) => item.id !== product.id);
+      setWishList(newListOfWish);
+    } else {
+      setWishList([...wishList, product]);
+    }
+  }
   return (
     <>
       {/* Provide cart and wishlist context to the entire app with routing setup*/}
       <CartContext.Provider value={{ cart, setAddToCart }}>
-        <WishListContext.Provider value={{ wishList, setWishList }}>
+        <WishListContext.Provider
+          value={{ wishList, setWishList, handleCLickBtnAddToWishList }}
+        >
           <Header />
           <Routes>
             <Route path="" element={<Home />} />

@@ -78,9 +78,9 @@ const Header = () => {
     <>
       <header className={`${scrollY >= 200 ? "fixed" : ""}`}>
         <div className="container">
-          <div className="logo">
+          <Link className="logo" to={"/"}>
             <img src={logo} />
-          </div>
+          </Link>
           <div className="search">
             <form>
               <input

@@ -17,22 +17,11 @@ import { BsCartCheck } from "react-icons/bs";
 
 const Card = ({ product, inCart, inWishList }) => {
   const { cart, setAddToCart } = useContext(CartContext);
-  const { wishList, setWishList } = useContext(WishListContext);
+  const { handleCLickBtnAddToWishList } = useContext(WishListContext);
 
   // Add product to cart with initial quantity of 1
   function handleClickBtnAddToCart(product) {
     setAddToCart([...cart, { ...product, quantity: 1 }]);
-  }
-
-  // Add or remove product from wishlist depending on its current presence
-  function handleCLickBtnAddToWishList(product) {
-    const find = wishList.some((item) => item.id === product.id);
-    if (find) {
-      const newListOfWish = wishList.filter((item) => item.id !== product.id);
-      setWishList(newListOfWish);
-    } else {
-      setWishList([...wishList, product]);
-    }
   }
 
   const rating = Array(Math.ceil(product.rating)).fill(0);
