@@ -55,6 +55,7 @@ const Header = () => {
     return () => window.removeEventListener("scroll", calcScrollY);
   }, []);
 
+  // Wait 1 second after typing stops, then fetch products from the API based on inputSearch
   useEffect(() => {
     const timer = setTimeout(() => {
       const fetchProductByInputSearch = async () => {

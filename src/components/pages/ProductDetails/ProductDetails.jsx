@@ -84,7 +84,6 @@ const ProductDetails = () => {
     fetchProduct();
   }, [id]);
 
-  ///////////////////////////////////////////////////////////////////////////////////////////
   // Check if the product is in the cart and update inCart state
   useEffect(() => {
     const isInCart = cart.some((prod) => prod.id === product.id);

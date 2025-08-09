@@ -5,7 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import { CartContext, WishListContext } from "../../context/ProductsContext";
 import Card from "../../product/Card";
 
-import SkeletonGridProducts from "../../skeleton_grid_products/skeletonGridProducts";
+import SkeletonGridProducts from "../../skeleton_grid_products/SkeletonGridProducts";
 
 const SearchResults = () => {
   // Retrieve all products from the cart context
