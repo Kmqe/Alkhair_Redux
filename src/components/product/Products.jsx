@@ -1,9 +1,5 @@
 import "./products.css";
 
-import { useContext } from "react";
-import { CartContext } from "../context/ProductsContext";
-import { WishListContext } from "../context/ProductsContext";
-
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
@@ -14,10 +10,12 @@ import "swiper/css/pagination";
 import { Navigation, Autoplay } from "swiper/modules";
 
 import Card from "./Card";
+import { useSelector } from "react-redux";
 
 const Products = ({ category, productsOfArray }) => {
-  const { cart } = useContext(CartContext);
-  const { wishList } = useContext(WishListContext);
+  // Get cart and wish list data from Redux store
+  const cart = useSelector((state) => state.cart.cart);
+  const wishList = useSelector((state) => state.wishList.wishList);
 
   return (
     <section className="product">
@@ -52,7 +50,6 @@ const Products = ({ category, productsOfArray }) => {
           {productsOfArray.map((product) => {
             const inCart = cart.some((item) => item.id === product.id);
             const inWishList = wishList.some((item) => item.id === product.id);
-
             return (
               <SwiperSlide key={product.id}>
                 <Card

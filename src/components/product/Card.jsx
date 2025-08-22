@@ -3,10 +3,6 @@ import "./card.css";
 // Link component for navigation between routes
 import { Link } from "react-router-dom";
 
-// React Hooks
-import { useContext } from "react";
-import { CartContext, WishListContext } from "../context/ProductsContext";
-
 // ICONS
 import { FaStar } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
@@ -15,16 +11,25 @@ import { FaHeart } from "react-icons/fa6";
 import { FaShare } from "react-icons/fa";
 import { BsCartCheck } from "react-icons/bs";
 
-const Card = ({ product, inCart, inWishList }) => {
-  const { cart, setAddToCart } = useContext(CartContext);
-  const { handleCLickBtnAddToWishList } = useContext(WishListContext);
+import { useDispatch } from "react-redux";
+// Import the addToCart action from the cart slice
+import { addToCart } from "../../features/cart/cartSlice";
+// Action to add or remove a product from the wish list
+import { toggleProductInWishList } from "../../features/wishList/wishListSlice";
 
-  // Add product to cart with initial quantity of 1
+const Card = ({ product, inCart, inWishList }) => {
+  const dispatch = useDispatch();
+  const rating = Array(Math.ceil(product.rating)).fill(0);
+
+  // Add product to cart
   function handleClickBtnAddToCart(product) {
-    setAddToCart([...cart, { ...product, quantity: 1 }]);
+    dispatch(addToCart(product));
   }
 
-  const rating = Array(Math.ceil(product.rating)).fill(0);
+  // Add product to wish list
+  function handleToggleWishList() {
+    dispatch(toggleProductInWishList(product));
+  }
 
   return (
     <div className="card_product">
@@ -41,7 +46,7 @@ const Card = ({ product, inCart, inWishList }) => {
           <span
             className={`${inWishList ? "in-wish-list" : ""}`}
             onClick={() => {
-              handleCLickBtnAddToWishList(product);
+              handleToggleWishList();
             }}
           >
             {" "}

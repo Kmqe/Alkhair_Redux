@@ -1,15 +1,7 @@
 import "./header.css";
-// Import the website logo image
 import logo from "/images/logo.png";
-// Import React Hooks
-import { useContext, useEffect, useState } from "react";
-
-import { CartContext } from "../../context/ProductsContext";
-import { WishListContext } from "../../context/ProductsContext";
-
-// Import Link component to navigate between pages without reloading
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
 // ICONS
 import { IoIosSearch } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa";
@@ -18,7 +10,13 @@ import { IoPerson } from "react-icons/io5";
 import { FaBars } from "react-icons/fa";
 import { CgClose } from "react-icons/cg";
 
+import { useSelector } from "react-redux";
+
 const Header = () => {
+  // Get cart and wish list data from Redux store
+  const cart = useSelector((state) => state.cart.cart);
+  const wishList = useSelector((state) => state.wishList.wishList);
+
   // State to store the current screen width
   const [widthScreen, setWidthScreen] = useState(window.innerWidth);
   // State to control sidebar visibility (only shown on small screens)
@@ -31,9 +29,6 @@ const Header = () => {
   const [productsOfSearch, setProductsOfSearch] = useState([]);
   // Controls visibility of search suggestions; shown when search input is focused
   const [showListOfSearch, setShowListOfSearch] = useState(false);
-
-  const { cart } = useContext(CartContext);
-  const { wishList } = useContext(WishListContext);
 
   // Update the screen width state whenever the window is resized
   useEffect(() => {

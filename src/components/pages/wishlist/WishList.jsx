@@ -1,12 +1,12 @@
 import "./wish_list.css";
-import { useContext } from "react";
-import { CartContext, WishListContext } from "../../context/ProductsContext";
 import Card from "../../product/Card";
 import "../../product/productSkeleton/ProductSkeleton";
+import { useSelector } from "react-redux";
 
 const WishList = () => {
-  const { wishList } = useContext(WishListContext);
-  const { cart } = useContext(CartContext);
+  // Get cart and wish list data from Redux store
+  const cart = useSelector((state) => state.cart.cart);
+  const wishList = useSelector((state) => state.wishList.wishList);
 
   return (
     <section className="wish-list">

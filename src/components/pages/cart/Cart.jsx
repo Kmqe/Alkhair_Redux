@@ -1,27 +1,28 @@
 import "./cart.css";
-import { useContext, useState, useEffect } from "react";
-import { CartContext } from "../../context/ProductsContext";
+import { useState, useEffect } from "react";
 
+// Image shown when the cart is empty
 import cartIsEmpty2 from "../../images/cart_is_empty2.png";
 
 import { Link } from "react-router-dom";
-
 // ICONS
 import { MdDeleteOutline } from "react-icons/md";
 import { LuPlus } from "react-icons/lu";
 import { LuMinus } from "react-icons/lu";
 
-const Cart = () => {
-  const { cart } = useContext(CartContext);
-  const { setAddToCart } = useContext(CartContext);
+import { useSelector, useDispatch } from "react-redux";
+// Import the actions from the cart slice
+import {
+  removeFromCart,
+  incrementQuantity,
+  decrementQuantity,
+} from "../../../features/cart/cartSlice";
 
-  // Calculate subtotal when component loads based on cart items
-  const [subTotal, setSubTotal] = useState(() => {
-    const total = cart.reduce((total, product) => {
-      return total + product.price * product.quantity;
-    }, 0);
-    return total ? total : 0;
-  });
+const Cart = () => {
+  const dispatch = useDispatch();
+  // Get cart and wish list data from Redux store
+  const cart = useSelector((state) => state.cart.cart);
+  const subTotal = useSelector((state) => state.cart.subTotal);
 
   // State to store the current screen width
   const [widthScreen, setWidthScreen] = useState(window.innerWidth);
@@ -36,38 +37,19 @@ const Cart = () => {
     return () => window.removeEventListener("resize", calcSize);
   }, []);
 
-  // Remove a specific product from the cart by its id
+  // Remove a specific product from the cart
   function handleClickDelete(product) {
-    const updateCart = cart.filter((item) => {
-      return item.id !== product.id;
-    });
-    setAddToCart(updateCart);
+    dispatch(removeFromCart(product));
   }
 
   // Increase product quantity in cart if stock allows
   function handleClickPlus(product) {
-    const updateCart = cart.map((item) => {
-      if (item.id !== product.id) {
-        return item;
-      }
-      if (product.quantity >= product.stock) return product;
-      setSubTotal((value) => value + product.price);
-      return { ...product, quantity: product.quantity + 1 };
-    });
-    setAddToCart(updateCart);
+    dispatch(incrementQuantity(product));
   }
 
   // Decrease product quantity in cart if it's more than 1
   function handleClickMinus(product) {
-    const updateCart = cart.map((item) => {
-      if (item.id !== product.id) {
-        return item;
-      }
-      if (product.quantity == 1) return product;
-      setSubTotal((value) => value - product.price);
-      return { ...product, quantity: product.quantity - 1 };
-    });
-    setAddToCart(updateCart);
+    dispatch(decrementQuantity(product));
   }
 
   return cart.length ? (

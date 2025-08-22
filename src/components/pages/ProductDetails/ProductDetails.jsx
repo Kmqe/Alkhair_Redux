@@ -1,13 +1,10 @@
 import "./product_details.css";
 // Import the format function from date-fns to format dates
 import { format } from "date-fns";
-// Import React Hooks
-import { useContext, useEffect, useState } from "react";
+
+import { useEffect, useState } from "react";
 // Get URL parameters using useParams from react-router-dom
 import { useParams } from "react-router-dom";
-// Import Cart and WishList contexts to access shared data
-import { CartContext, WishListContext } from "../../context/ProductsContext";
-
 // ICONS
 import { FaStar } from "react-icons/fa6";
 import { TiShoppingCart } from "react-icons/ti";
@@ -31,7 +28,18 @@ import ProductDetailsSkeleton from "./productDetailsSkeleton/ProductDetailsSkele
 import Card from "../../product/Card";
 import ScrollToTop from "../../ScrollToTop";
 
+import { useSelector, useDispatch } from "react-redux";
+// Import the addToCart action from the cart slice
+import { addToCart } from "../../../features/cart/cartSlice";
+// Action to add or remove a product from the wish list
+import { toggleProductInWishList } from "../../../features/wishList/wishListSlice";
+
 const ProductDetails = () => {
+  const dispatch = useDispatch();
+  // Get cart and wish list data from Redux store
+  const cart = useSelector((state) => state.cart.cart);
+  const wishList = useSelector((state) => state.wishList.wishList);
+
   // Store the fetched product data
   const [product, setProduct] = useState({});
   // Track loading state while fetching product
@@ -48,9 +56,6 @@ const ProductDetails = () => {
   const [reviews, setReviews] = useState([]);
   // State to store products fetched from the category API
   const [categoryProducts, setCategoryProducts] = useState([]);
-
-  const { cart, setAddToCart } = useContext(CartContext);
-  const { wishList, handleCLickBtnAddToWishList } = useContext(WishListContext);
   // Get the product ID from the URL parameters
   const { id } = useParams();
 
@@ -90,9 +95,14 @@ const ProductDetails = () => {
     setInCart(isInCart);
   }, [loading, cart, product.id]);
 
+  // Add product to cart
   function handleClickBtnAddToCart() {
-    setAddToCart([...cart, { ...product, quantity: 1 }]);
-    setInCart(true);
+    dispatch(addToCart(product));
+  }
+
+  // Handle adding or removing a product from the wish list
+  function handleToggleWishList(product) {
+    dispatch(toggleProductInWishList(product));
   }
 
   return loading ? (
@@ -144,7 +154,7 @@ const ProductDetails = () => {
               <span
                 className={`${inWishList ? "in-wish-list" : ""}`}
                 onClick={() => {
-                  handleCLickBtnAddToWishList(product);
+                  handleToggleWishList(product);
                 }}
               >
                 {" "}
@@ -230,7 +240,6 @@ const ProductDetails = () => {
                   <span className="avtar">{review.reviewerName.charAt(0)}</span>
                   <div className="name-date">
                     <p className="customer-name">{review.reviewerName}</p>
-                    {/* <p className="date-publish">{review.date}</p> */}
                     <p className="date-publish">
                       {format(review.date, "MMM dd, yyyy")}
                     </p>

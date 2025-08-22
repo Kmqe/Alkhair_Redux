@@ -1,17 +1,15 @@
-import { useEffect, useState, useContext } from "react";
 import "./search_results.css";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-
-import { CartContext, WishListContext } from "../../context/ProductsContext";
 import Card from "../../product/Card";
-
 import SkeletonGridProducts from "../../skeleton_grid_products/SkeletonGridProducts";
+import { useSelector } from "react-redux";
 
 const SearchResults = () => {
-  // Retrieve all products from the cart context
-  const { cart } = useContext(CartContext);
-  // Retrieve all products from the wishlist context
-  const { wishList } = useContext(WishListContext);
+  // Get cart and wish list data from Redux store
+  const cart = useSelector((state) => state.cart.cart);
+  const wishList = useSelector((state) => state.wishList.wishList);
+
   // Show skeleton placeholder until data is fetched from the server
   const [loading, setLoading] = useState(true);
   // State to hold products fetched from the API
@@ -44,7 +42,6 @@ const SearchResults = () => {
     <section className="search-result">
       <div className="container">
         <h1>Results for : {query}</h1>
-
         <div className="products_container">
           {products.map((product) => {
             const inWishList = wishList.some((item) => item.id === product.id);
