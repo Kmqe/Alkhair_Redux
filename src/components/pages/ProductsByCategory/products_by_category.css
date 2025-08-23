@@ -7,6 +7,23 @@
   font-size: 40px;
 }
 
+.products_by_category select {
+  margin: 0 10px 20px;
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+}
+
+.products_by_category select:hover {
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.products_by_category select option {
+  background-color: #ababab;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
 .products_by_category .container .products_container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
